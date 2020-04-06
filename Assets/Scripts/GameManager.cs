@@ -110,3 +110,6 @@ public class GameManager : MonoBehaviour
         pauseBackground.enabled = paused;
     }
 }
+// need an enemy script and presets for different types of enemies? 
+// need a pizza projectile
+// need a pizza conveyer belt..? ugh!

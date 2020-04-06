@@ -7,7 +7,7 @@ public class PlayerMovementScript : MonoBehaviour
     public Rigidbody2D rb;
     public Animator anim;
     Vector2 speed;
-    public float moveSpeed = 16.0f;
+    public float moveSpeed = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
