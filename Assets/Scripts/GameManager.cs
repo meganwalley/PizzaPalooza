@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     public Button ReleasePizzaButton;
     public Button UpMovementButton;
     public Button DownMovementButton;
+    // Elements that change during the game.
+    public Image Pizza;
+    public Text Score;
     // Adding string keys so that players can have custom inputs.
     public string KeyThrow;
     public string KeyPickUp;
@@ -25,10 +28,17 @@ public class GameManager : MonoBehaviour
     public GameObject Player;
     PlayerMovementScript movement;
     bool paused = false;
+    bool hasPizza = false;
+    bool CD = false;
     int points = 0;
-    public Image pauseBackground;
+    public GameObject pauseBackground;
+    public GameObject PizzaProjectilePrefab;
 
     public string nextScene = "MenuScene";
+
+    public List<GameObject> ConveyerBeltPizzas;
+    public List<GameObject> thrownPizzas;
+    public List<GameObject> zombies;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +51,9 @@ public class GameManager : MonoBehaviour
         KeyQuit = PlayerPrefs.GetString("Quit", "q");
 
         movement = Player.GetComponent<PlayerMovementScript>();
+
+        PauseButton.onClick.AddListener(Pause);
+        ResumeButton.onClick.AddListener(Pause);
     }
 
     void Update()
@@ -61,28 +74,47 @@ public class GameManager : MonoBehaviour
         {
             if  (Input.GetKey(KeyQuit))
             {
-                onQuit();
+                OnQuit();
             }
         } else
         {
-            // if we are throwing or picking up, not both
-            if (Input.GetKey(KeyPickUp) && !Input.GetKey(KeyThrow))
+            if (!CD)
             {
-                Log("Picking up a pizza.");
-                movement.PickUp();
-            } else if (!Input.GetKey(KeyPickUp) && Input.GetKey(KeyThrow))
-            {
-                Log("Throwing a pizza.");
-                movement.Throw();
+                // if we are throwing or picking up, not both
+                if (Input.GetKeyUp(KeyPickUp) && !Input.GetKeyUp(KeyThrow) && !hasPizza)
+                {
+                    Log("Picking up a pizza.");
+                    if (movement.GetPizza() != null)
+                    {
+                        DeleteGameObject(movement.GetPizza());
+                        movement.PickUp();
+                        hasPizza = true;
+                        Pizza.color = new Color(Pizza.color.r, Pizza.color.g, Pizza.color.b, 1);
+                        CD = true;
+                        StartCoroutine(Cooldown(0.5f));
+                    }
+                }
+                else if (!Input.GetKeyUp(KeyPickUp) && Input.GetKeyUp(KeyThrow) && hasPizza)
+                {
+                    Log("Throwing a pizza.");
+                    movement.Throw();
+                    hasPizza = false;
+                    Pizza.color = new Color(Pizza.color.r, Pizza.color.g, Pizza.color.b, 0);
+                    CD = true;
+                    StartCoroutine(Cooldown(0.5f));
+                    GameObject temp = Instantiate(PizzaProjectilePrefab);
+                    temp.transform.position = Player.transform.position;
+                    thrownPizzas.Add(temp);
+                }
             }
 
             if (Input.GetKey(KeyUp) && !Input.GetKey(KeyDown))
             {
-                Log("Moving character up");
+                //Log("Moving character up");
                 movement.MoveUp();
             } else if (!Input.GetKey(KeyUp) && Input.GetKey(KeyDown))
             {
-                Log("Moving character down");
+                //Log("Moving character down");
                 movement.MoveDown();
             }
         }
@@ -92,7 +124,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Log: " + msg);
     }
-    public void onQuit()
+    public void OnQuit()
     {
         Debug.Log("Note: Moving from MenuScene to " + nextScene);
         SceneManager.LoadScene(nextScene);
@@ -105,11 +137,95 @@ public class GameManager : MonoBehaviour
         // needs to pause pizza generation
         // needs to pause point generation
         // needs to freeze player (done)
-        Debug.Log("Note: Pause");
         paused = !paused;
-        pauseBackground.enabled = paused;
+        Debug.Log("Note: Pause " + paused);
+        PauseButton.gameObject.SetActive(!paused);
+        ResumeButton.gameObject.SetActive(paused);
+        pauseBackground.SetActive(paused);
+        foreach (GameObject o in ConveyerBeltPizzas)
+        {
+            if (o == null)
+                Object.Destroy(o);
+            else
+                o.GetComponent<PizzaCollectibleScript>().pause = paused;
+        }
+        foreach (GameObject o in thrownPizzas)
+        {
+            if (o == null)
+                Object.Destroy(o);
+            else
+                o.GetComponent<PizzaProjectileScript>().pause = paused;
+        }
+        foreach (GameObject o in zombies)
+        {
+            if (o == null)
+                Object.Destroy(o);
+            else
+                o.GetComponent<EnemyScript>().pause = paused;
+        }
+    }
+
+    public bool IsPaused()
+    {
+        return paused;
+    }
+
+    public bool DeleteGameObject(GameObject obj)
+    {
+        if (obj.tag == "Pizza Projectile")
+        {
+            foreach(GameObject o in thrownPizzas)
+            {
+                if (o == obj)
+                {
+                    Object.Destroy(obj);
+                    thrownPizzas.Remove(o);
+                    return true;
+                }
+            }
+            Object.Destroy(obj);
+            return true;
+        } else if (obj.tag == "Zombie")
+        {
+            foreach (GameObject o in thrownPizzas)
+            {
+                if (o == obj)
+                {
+                    Object.Destroy(obj);
+                    thrownPizzas.Remove(o);
+                    return true;
+                }
+            }
+            Object.Destroy(obj);
+            return true;
+        } else if (obj.tag == "Pizza Collectible")
+        {
+            foreach (GameObject o in ConveyerBeltPizzas)
+            {
+                if (o == obj)
+                {
+                    Object.Destroy(obj);
+                    ConveyerBeltPizzas.Remove(o);
+                    return true;
+                }
+            }
+            Object.Destroy(obj);
+            return true;
+        }
+        return true;
+    }
+
+    IEnumerator Cooldown(float animDelay)
+    {
+        yield return new WaitForSeconds(animDelay);
+        CD = false;
+    }
+    public void AddPizzaConveyer(GameObject obj)
+    {
+        this.ConveyerBeltPizzas.Add(obj);
     }
 }
+
 // need an enemy script and presets for different types of enemies? 
 // need a pizza projectile
 // need a pizza conveyer belt..? ugh!
