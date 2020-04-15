@@ -49,9 +49,9 @@ public class PlayerMovementScript : MonoBehaviour
     {
         if (collision.gameObject.name == "LeftPlayerWall")
             leftWall = true;
-        if (collision.gameObject.name == "RightPlayerWall")
+        else if(collision.gameObject.name == "RightPlayerWall")
             rightWall = true;
-        if (collision.gameObject.name.Contains("PizzaCollectible")) {
+        else if(collision.gameObject.name.Contains("PizzaCollectible")) {
             pizza = collision.gameObject;
             touchingPizza = true;
         }
@@ -61,10 +61,9 @@ public class PlayerMovementScript : MonoBehaviour
     {
         if (collision.gameObject.name == "LeftPlayerWall")
             leftWall = false;
-        if (collision.gameObject.name == "RightPlayerWall")
+        else if (collision.gameObject.name == "RightPlayerWall")
             rightWall = false;
-        if (collision.gameObject.name.Contains("PizzaCollectible"))
-        {
+        else if (collision.gameObject.name.Contains("PizzaCollectible")) {
             pizza = null;
             touchingPizza = false;
         }

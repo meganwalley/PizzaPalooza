@@ -187,12 +187,12 @@ public class GameManager : MonoBehaviour
             return true;
         } else if (obj.tag == "Zombie")
         {
-            foreach (GameObject o in thrownPizzas)
+            foreach (GameObject o in zombies)
             {
                 if (o == obj)
                 {
                     Object.Destroy(obj);
-                    thrownPizzas.Remove(o);
+                    zombies.Remove(o); 
                     return true;
                 }
             }
@@ -223,6 +223,10 @@ public class GameManager : MonoBehaviour
     public void AddPizzaConveyer(GameObject obj)
     {
         this.ConveyerBeltPizzas.Add(obj);
+    }
+    public void AddEnemy(GameObject obj)
+    {
+        this.zombies.Add(obj);
     }
 }
 

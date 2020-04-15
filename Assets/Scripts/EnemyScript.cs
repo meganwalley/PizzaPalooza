@@ -4,16 +4,51 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+    public Rigidbody2D rb;
+    public GameManager manager;
+    //                                        x       y
+    public Vector2 velocity = new Vector2(-1.9f, 1.097f);
+    public float speed = 0.75f;
     public bool pause = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    public int health = 1;
+    bool wall = false;
     // Update is called once per frame
+    private void Start()
+    {
+        rb = this.GetComponent<Rigidbody2D>();
+    }
     void Update()
     {
-        
+        if (pause)
+            return;
+        else if (wall)
+        {
+            // damage health
+            return;
+        }
+        rb.MovePosition(rb.position + speed * velocity * Time.deltaTime);
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name.Contains("PizzaProjectile"))
+        {
+            --health;
+            if (health <= 0)
+            {
+                Debug.Log("This enemy is dead.");
+                manager.DeleteGameObject(collision.gameObject);
+                manager.DeleteGameObject(this.gameObject);
+                // delete the world
+            }
+        } else if (collision.gameObject.name.Contains("Wall"))
+        {
+            wall = true;
+        }
+        // 1, 2
+    }
+
+    public void SetGameManager(GameManager manager)
+    {
+        this.manager = manager;
     }
 }
