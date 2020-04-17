@@ -35,9 +35,10 @@ public class GameManager : MonoBehaviour
     float points = 0;
     public GameObject pauseBackground;
     public GameObject PizzaProjectilePrefab;
-    
 
-    public string nextScene = "MenuScene";
+
+    public string nextScene = "GameOverScene";
+    public string menuScene = "MenuScene";
 
     public List<GameObject> ConveyerBeltPizzas;
     public List<GameObject> thrownPizzas;
@@ -127,6 +128,13 @@ public class GameManager : MonoBehaviour
                 movement.MoveDown();
             }
         }
+
+        int currentHealth = health.currentHealth;
+        DisplayHealth(currentHealth);
+        if (currentHealth <= 0)
+        {
+            
+        }
     }
 
     public void Log(string msg)
@@ -135,8 +143,8 @@ public class GameManager : MonoBehaviour
     }
     public void OnQuit()
     {
-        Debug.Log("Note: Moving from MenuScene to " + nextScene);
-        SceneManager.LoadScene(nextScene);
+        Debug.Log("Note: Moving from PlayScene to MenuScene");
+        SceneManager.LoadScene(menuScene);
     }
 
     public void Pause()
@@ -242,8 +250,20 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         points += pointsEverySecond;
-        Score.text = System.String.Format("${0:0.00", points);
+        Score.text = points.ToString("$ 0000.00");
         StartCoroutine(PointIncrementalTime(second));
+    }
+
+    void DisplayHealth(int currentHealth)
+    {
+
+    }
+    
+    IEnumerator GameOver()
+    {
+        yield return new WaitForSeconds(2f);
+        Debug.Log("Note: Moving from PlayScene to " + nextScene);
+        SceneManager.LoadScene(nextScene);
     }
 }
 
