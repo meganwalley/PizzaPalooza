@@ -100,9 +100,11 @@ MonoBehaviour:
   rb: {fileID: 0}
   manager: {fileID: 0}
   velocity: {x: -1.9, y: 1.097}
-  speed: 0.75
+  speed: 0.5
   pause: 0
   health: 1
+  damage: 1
+  worth: 2.5
 --- !u!50 &5995494962692338371
 Rigidbody2D:
   serializedVersion: 4

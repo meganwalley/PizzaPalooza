@@ -17,7 +17,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody2D>();
     //    anim = this.GetComponent<Animator>();
-        speed = new Vector2(19, 10.97f);
+        speed = new Vector2(9.5f, 5.485f); // 19, 10.97
     }
 
     public void MoveUp()
