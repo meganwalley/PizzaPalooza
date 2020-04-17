@@ -27,18 +27,24 @@ public class GameManager : MonoBehaviour
     // Other important things
     public GameObject Player;
     PlayerMovementScript movement;
+    public GameObject ShopWalls;
+    HealthScript health;
     bool paused = false;
     bool hasPizza = false;
     bool CD = false;
-    int points = 0;
+    float points = 0;
     public GameObject pauseBackground;
     public GameObject PizzaProjectilePrefab;
+    
 
     public string nextScene = "MenuScene";
 
     public List<GameObject> ConveyerBeltPizzas;
     public List<GameObject> thrownPizzas;
     public List<GameObject> zombies;
+
+    private float second = 0.25f;
+    private float pointsEverySecond = 0.01f;
 
     // Start is called before the first frame update
     void Start()
@@ -51,9 +57,12 @@ public class GameManager : MonoBehaviour
         KeyQuit = PlayerPrefs.GetString("Quit", "q");
 
         movement = Player.GetComponent<PlayerMovementScript>();
+        health = ShopWalls.GetComponent<HealthScript>();
 
         PauseButton.onClick.AddListener(Pause);
         ResumeButton.onClick.AddListener(Pause);
+
+        StartCoroutine(PointIncrementalTime(3f));
     }
 
     void Update()
@@ -227,6 +236,14 @@ public class GameManager : MonoBehaviour
     public void AddEnemy(GameObject obj)
     {
         this.zombies.Add(obj);
+    }
+
+    IEnumerator PointIncrementalTime(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        points += pointsEverySecond;
+        Score.text = System.String.Format("${0:0.00", points);
+        StartCoroutine(PointIncrementalTime(second));
     }
 }
 

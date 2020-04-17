@@ -11,6 +11,7 @@ public class EnemyScript : MonoBehaviour
     public float speed = 0.75f;
     public bool pause = false;
     public int health = 1;
+    public int damage = 1;
     bool wall = false;
     // Update is called once per frame
     private void Start()
@@ -35,7 +36,6 @@ public class EnemyScript : MonoBehaviour
             --health;
             if (health <= 0)
             {
-                Debug.Log("This enemy is dead.");
                 manager.DeleteGameObject(collision.gameObject);
                 manager.DeleteGameObject(this.gameObject);
                 // delete the world
@@ -50,5 +50,9 @@ public class EnemyScript : MonoBehaviour
     public void SetGameManager(GameManager manager)
     {
         this.manager = manager;
+    }
+    public int GetDamage()
+    {
+        return damage;
     }
 }

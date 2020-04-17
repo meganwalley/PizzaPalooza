@@ -10,6 +10,7 @@ public class EnemySpawnerScript : MonoBehaviour
     public GameManager manager;
     public float waveTime;
     public int maxSpawnAtOnce;
+    public int wave = 0;
 
 
     // Start is called before the first frame update
@@ -25,8 +26,9 @@ public class EnemySpawnerScript : MonoBehaviour
     IEnumerator Spawner(float del)
     {
         yield return new WaitForSeconds(del);
-        Debug.Log("Spawn");
-        int temp = Random.Range(1, maxSpawnAtOnce - 1);
+        wave++;
+        Debug.Log("Spawning wave #" + wave);
+        int temp = Random.Range(0, maxSpawnAtOnce);
         for (int i = 0; i <= temp; ++i)
         {
             StartCoroutine(Spawn(Random.Range(0f, 1f)));
@@ -42,7 +44,6 @@ public class EnemySpawnerScript : MonoBehaviour
             GameObject temp = Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Count)]);
             temp.transform.position = (spawnPoints[Random.Range(0, spawnPoints.Count)]).transform.position;
             temp.GetComponent<EnemyScript>().SetGameManager(manager);
-            Debug.Log("Spawning " + temp.name);
             manager.AddEnemy(temp);
         }
     }
