@@ -868,7 +868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13d104b9a8409024da57ac2752f414f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayTime: 1
+  delayTime: 2
   maxHealth: 10
   currentHealth: 10
 --- !u!1 &518894263
@@ -933,7 +933,8 @@ MonoBehaviour:
   ShopWalls: {fileID: 418051369}
   pauseBackground: {fileID: 1342162690}
   PizzaProjectilePrefab: {fileID: 1887715764913424203, guid: f07a6c4541dc51a4ebbe8c552a7533a0, type: 3}
-  nextScene: MenuScene
+  nextScene: GameOverScene
+  menuScene: MenuScene
   ConveyerBeltPizzas: []
   thrownPizzas: []
   zombies: []
@@ -1866,6 +1867,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   waveTime: 6
   maxSpawnAtOnce: 3
+  wave: 0
 --- !u!4 &1422330153
 Transform:
   m_ObjectHideFlags: 0

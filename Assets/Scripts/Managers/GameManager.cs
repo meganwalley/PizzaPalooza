@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
         DisplayHealth(currentHealth);
         if (currentHealth <= 0)
         {
-            
+            StartCoroutine(GameOver());
         }
     }
 
@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour
         return paused;
     }
 
-    public bool DeleteGameObject(GameObject obj)
+    public bool DeleteGameObject(GameObject obj, bool getPoints = false)
     {
         if (obj.tag == "Pizza Projectile")
         {
@@ -208,8 +208,10 @@ public class GameManager : MonoBehaviour
             {
                 if (o == obj)
                 {
+                    if (getPoints)
+                        points += o.GetComponent<EnemyScript>().GetPoints();
                     Object.Destroy(obj);
-                    zombies.Remove(o); 
+                    zombies.Remove(o);
                     return true;
                 }
             }

@@ -12,6 +12,7 @@ public class EnemyScript : MonoBehaviour
     public bool pause = false;
     public int health = 1;
     public int damage = 1;
+    public float worth = 2.5f;
     bool wall = false;
     // Update is called once per frame
     private void Start()
@@ -37,7 +38,7 @@ public class EnemyScript : MonoBehaviour
             if (health <= 0)
             {
                 manager.DeleteGameObject(collision.gameObject);
-                manager.DeleteGameObject(this.gameObject);
+                manager.DeleteGameObject(this.gameObject, true);
                 // delete the world
             }
         } else if (collision.gameObject.name.Contains("Wall"))
@@ -54,5 +55,9 @@ public class EnemyScript : MonoBehaviour
     public int GetDamage()
     {
         return damage;
+    }
+    public float GetPoints()
+    {
+        return worth;
     }
 }

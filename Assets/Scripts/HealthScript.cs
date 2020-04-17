@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealthScript : MonoBehaviour
 {
 
-    public float delayTime;
+    public float delayTime = 2f;
     bool canBeDamaged = true;
     public int maxHealth = 10;
     public int currentHealth = 10;
@@ -49,7 +49,6 @@ public class HealthScript : MonoBehaviour
 
     void Damage()
     {
-        Debug.Log("Testing Damage");
         if (enemiesTouching.Count == 0)
             return;
         foreach (EnemyScript es in enemiesTouching)
@@ -57,8 +56,6 @@ public class HealthScript : MonoBehaviour
             if (es != null)
             {
                 currentHealth -= es.GetDamage();
-
-                Debug.Log("Was Damaged");
             }
         }
     }
