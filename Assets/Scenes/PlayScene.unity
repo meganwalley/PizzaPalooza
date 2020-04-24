@@ -3116,7 +3116,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 570409548781679746, guid: 856410c2df1ec014aaa3453ecd63892f, type: 3}
       propertyPath: m_Name
-      value: PizzaCollectibleRotationWall
+      value: PizzaRotationWall
       objectReference: {fileID: 0}
     - target: {fileID: 570409548781679774, guid: 856410c2df1ec014aaa3453ecd63892f, type: 3}
       propertyPath: m_LocalPosition.x

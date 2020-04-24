@@ -35,9 +35,9 @@ public class EnemyScript : MonoBehaviour
         if (collision.gameObject.name.Contains("PizzaProjectile"))
         {
             --health;
+            manager.DeleteGameObject(collision.gameObject);
             if (health <= 0)
             {
-                manager.DeleteGameObject(collision.gameObject);
                 manager.DeleteGameObject(this.gameObject, true);
                 // delete the world
             }

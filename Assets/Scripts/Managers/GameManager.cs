@@ -230,12 +230,14 @@ public class GameManager : MonoBehaviour
             {
                 if (o == obj)
                 {
-                    Destroy(obj);
                     ConveyerBeltPizzas.Remove(o);
+                    Destroy(obj);
+                    Object.Destroy(obj);
                     return true;
                 }
             }
             Destroy(obj);
+            Object.Destroy(obj);
             return true;
         }
         return true;
