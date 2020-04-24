@@ -6,6 +6,7 @@ public class EnemyScript : MonoBehaviour
 {
     public Rigidbody2D rb;
     public GameManager manager;
+    public Animator anim;
     //                                        x       y
     public Vector2 velocity = new Vector2(-1.9f, 1.097f);
     public float speed = 0.75f;
@@ -18,6 +19,7 @@ public class EnemyScript : MonoBehaviour
     private void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
+        anim = this.GetComponent<Animator>();
     }
     void Update()
     {
@@ -38,12 +40,14 @@ public class EnemyScript : MonoBehaviour
             manager.DeleteGameObject(collision.gameObject);
             if (health <= 0)
             {
-                manager.DeleteGameObject(this.gameObject, true);
+                anim.SetBool("isDead", true);
+                StartCoroutine(DelayDeath());
                 // delete the world
             }
         } else if (collision.gameObject.name.Contains("Wall"))
         {
             wall = true;
+            anim.SetBool("hitting", true);
         }
         // 1, 2
     }
@@ -59,5 +63,12 @@ public class EnemyScript : MonoBehaviour
     public float GetPoints()
     {
         return worth;
+    }
+
+    IEnumerator DelayDeath()
+    {
+        damage = 0;
+        yield return new WaitForSeconds(1.1f);
+        manager.DeleteGameObject(this.gameObject, true);
     }
 }
