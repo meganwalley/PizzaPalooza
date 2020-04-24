@@ -35,7 +35,10 @@ public class GameManager : MonoBehaviour
     float points = 0;
     public GameObject pauseBackground;
     public GameObject PizzaProjectilePrefab;
+    public GameObject flashlight;
+    public HorizontalLayoutGroup healthContainer;
 
+    public GameObject HealthIndicator;
 
     public string nextScene = "GameOverScene";
     public string menuScene = "MenuScene";
@@ -94,12 +97,13 @@ public class GameManager : MonoBehaviour
                 if (Input.GetKeyUp(KeyPickUp) && !Input.GetKeyUp(KeyThrow) && !hasPizza)
                 {
                     Log("Picking up a pizza.");
-                    if (movement.GetPizza() != null)
+                    GameObject grabbedPizza = movement.GetPizza();
+                    if (grabbedPizza != null)
                     {
-                        DeleteGameObject(movement.GetPizza());
-                        movement.PickUp();
+                        movement.PickUp(grabbedPizza);
+                        DeleteGameObject(grabbedPizza);
                         hasPizza = true;
-                        Pizza.color = new Color(Pizza.color.r, Pizza.color.g, Pizza.color.b, 1);
+                        //Pizza.color = new Color(Pizza.color.r, Pizza.color.g, Pizza.color.b, 1);
                         CD = true;
                         StartCoroutine(Cooldown(0.5f));
                     }
@@ -107,9 +111,9 @@ public class GameManager : MonoBehaviour
                 else if (!Input.GetKeyUp(KeyPickUp) && Input.GetKeyUp(KeyThrow) && hasPizza)
                 {
                     Log("Throwing a pizza.");
-                    movement.Throw();
-                    hasPizza = false;
-                    Pizza.color = new Color(Pizza.color.r, Pizza.color.g, Pizza.color.b, 0);
+                    movement.Throw(); // doesn't delete
+                    hasPizza = false; // doesn't delete
+                    //Pizza.color = new Color(Pizza.color.r, Pizza.color.g, Pizza.color.b, 0);
                     CD = true;
                     StartCoroutine(Cooldown(0.5f));
                     GameObject temp = Instantiate(PizzaProjectilePrefab);
@@ -135,6 +139,7 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(GameOver());
         }
+        flashlight.SetActive(hasPizza);
     }
 
     public void Log(string msg)
@@ -159,6 +164,8 @@ public class GameManager : MonoBehaviour
         PauseButton.gameObject.SetActive(!paused);
         ResumeButton.gameObject.SetActive(paused);
         pauseBackground.SetActive(paused);
+        health.pause = paused;
+
         foreach (GameObject o in ConveyerBeltPizzas)
         {
             if (o == null)
@@ -223,12 +230,12 @@ public class GameManager : MonoBehaviour
             {
                 if (o == obj)
                 {
-                    Object.Destroy(obj);
+                    Destroy(obj);
                     ConveyerBeltPizzas.Remove(o);
                     return true;
                 }
             }
-            Object.Destroy(obj);
+            Destroy(obj);
             return true;
         }
         return true;
@@ -251,19 +258,28 @@ public class GameManager : MonoBehaviour
     IEnumerator PointIncrementalTime(float delay)
     {
         yield return new WaitForSeconds(delay);
-        points += pointsEverySecond;
-        Score.text = points.ToString("$ 0000.00");
+        if (!paused)
+            points += pointsEverySecond;
+        Score.text = points.ToString("$ 0.00");
         StartCoroutine(PointIncrementalTime(second));
     }
 
     void DisplayHealth(int currentHealth)
     {
+        foreach (Transform child in healthContainer.transform)
+            Destroy(child.gameObject);
 
+        for (int i = 0; i < currentHealth; ++i)
+        {
+            GameObject temp = Instantiate(HealthIndicator);
+            temp.transform.SetParent(healthContainer.transform);
+        }
     }
     
     IEnumerator GameOver()
     {
         yield return new WaitForSeconds(2f);
+        PlayerPrefs.SetFloat("Score", points);
         Debug.Log("Note: Moving from PlayScene to " + nextScene);
         SceneManager.LoadScene(nextScene);
     }

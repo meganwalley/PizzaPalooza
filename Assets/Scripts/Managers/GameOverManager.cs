@@ -18,6 +18,7 @@ public class GameOverManager : MonoBehaviour
     {
         NextSceneButton.onClick.AddListener(onPlay);
         MenuButton.onClick.AddListener(onQuit);
+        ScoreText.text = PlayerPrefs.GetFloat("Score", 0).ToString("$ 0.00");
     }
 
     // Update is called once per frame

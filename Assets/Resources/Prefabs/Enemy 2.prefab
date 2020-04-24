@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5995494962692338371}
   - component: {fileID: 2172671052566685409}
   m_Layer: 10
-  m_Name: Enemy
+  m_Name: Enemy 2
   m_TagString: Zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5995494962692338370}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -7232043654148566273, guid: 40d21fa430b26504eadf4a80e89a794b, type: 3}
+  m_Sprite: {fileID: -4140450896781746705, guid: 40d21fa430b26504eadf4a80e89a794b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,9 +102,9 @@ MonoBehaviour:
   velocity: {x: -1.9, y: 1.097}
   speed: 0.5
   pause: 0
-  health: 1
+  health: 2
   damage: 1
-  worth: 2.5
+  worth: 4
 --- !u!50 &5995494962692338371
 Rigidbody2D:
   serializedVersion: 4
@@ -141,4 +141,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.20621827
+  m_Radius: 0.2

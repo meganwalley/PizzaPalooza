@@ -6,6 +6,7 @@ public class HealthScript : MonoBehaviour
 {
 
     public float delayTime = 2f;
+    public bool pause = false;
     bool canBeDamaged = true;
     public int maxHealth = 10;
     public int currentHealth = 10;
@@ -43,7 +44,8 @@ public class HealthScript : MonoBehaviour
     IEnumerator DamageCooldown(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Damage();
+        if (!pause)
+            Damage();
         StartCoroutine(DamageCooldown(delay));
     }
 
