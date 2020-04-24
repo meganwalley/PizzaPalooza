@@ -16,8 +16,8 @@ public class MenuScript : MonoBehaviour
     {
         PlayButton.onClick.AddListener(onPlay);
         QuitButton.onClick.AddListener(onQuit);
-        PlayerPrefs.SetString("PickUp", "a");
-        PlayerPrefs.SetString("Throw", "d");
+        PlayerPrefs.SetString("PickUp", "space");
+        PlayerPrefs.SetString("Throw", "space");
         PlayerPrefs.SetString("Up", "w");
         PlayerPrefs.SetString("Down", "s");
         PlayerPrefs.SetString("Escape", "escape");

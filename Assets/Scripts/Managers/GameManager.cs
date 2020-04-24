@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     public Button UpMovementButton;
     public Button DownMovementButton;
     // Elements that change during the game.
-    public Image Pizza;
     public Text Score;
     // Adding string keys so that players can have custom inputs.
     public string KeyThrow;
@@ -94,7 +93,7 @@ public class GameManager : MonoBehaviour
             if (!CD)
             {
                 // if we are throwing or picking up, not both
-                if (Input.GetKeyUp(KeyPickUp) && !Input.GetKeyUp(KeyThrow) && !hasPizza)
+                if (Input.GetKeyUp(KeyPickUp) /**&& !Input.GetKeyUp(KeyThrow)**/ && !hasPizza)
                 {
                     Log("Picking up a pizza.");
                     GameObject grabbedPizza = movement.GetPizza();
@@ -108,7 +107,7 @@ public class GameManager : MonoBehaviour
                         StartCoroutine(Cooldown(0.5f));
                     }
                 }
-                else if (!Input.GetKeyUp(KeyPickUp) && Input.GetKeyUp(KeyThrow) && hasPizza)
+                else if (/**!Input.GetKeyUp(KeyPickUp) &&**/ Input.GetKeyUp(KeyThrow) && hasPizza)
                 {
                     Log("Throwing a pizza.");
                     movement.Throw(); // doesn't delete
