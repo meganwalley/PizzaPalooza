@@ -121,12 +121,14 @@ public class GameManager : MonoBehaviour
                     thrownPizzas.Add(temp);
                 }
             }
-
-            if (Input.GetKey(KeyUp) && !Input.GetKey(KeyDown))
+            //(Input.GetKey(KeyUp)|| (Input.GetKey(KeyUp))
+            if ((Input.GetKey(KeyCode.UpArrow)|| (Input.GetKey(KeyCode.RightArrow))) 
+                && !(Input.GetKey(KeyCode.DownArrow) || (Input.GetKey(KeyCode.LeftArrow))))
             {
                 //Log("Moving character up");
                 movement.MoveUp();
-            } else if (!Input.GetKey(KeyUp) && Input.GetKey(KeyDown))
+            } else if (!(Input.GetKey(KeyCode.UpArrow) || (Input.GetKey(KeyCode.RightArrow))) 
+                && (Input.GetKey(KeyCode.DownArrow) || (Input.GetKey(KeyCode.LeftArrow))))
             {
                 //Log("Moving character down");
                 movement.MoveDown();
