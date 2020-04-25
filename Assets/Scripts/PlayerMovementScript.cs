@@ -18,7 +18,7 @@ public class PlayerMovementScript : MonoBehaviour
         pizzas = new List<GameObject>();
         rb = this.GetComponent<Rigidbody2D>();
     //    anim = this.GetComponent<Animator>();
-        speed = new Vector2(9.5f, 5.485f); // 19, 10.97
+        speed = new Vector2(4.75f, 2.7425f); // 19, 10.97 -> 9.5, 5.485 -> 4.75, 2.7425
     }
 
     public void MoveUp()

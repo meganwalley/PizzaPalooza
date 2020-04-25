@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
                         hasPizza = true;
                         //Pizza.color = new Color(Pizza.color.r, Pizza.color.g, Pizza.color.b, 1);
                         CD = true;
-                        StartCoroutine(Cooldown(0.5f));
+                        StartCoroutine(Cooldown(0.2f));
                     }
                 }
                 else if (/**!Input.GetKeyUp(KeyPickUp) &&**/ Input.GetKeyUp(KeyThrow) && hasPizza)
@@ -115,23 +115,11 @@ public class GameManager : MonoBehaviour
                     hasPizza = false; // doesn't delete
                     //Pizza.color = new Color(Pizza.color.r, Pizza.color.g, Pizza.color.b, 0);
                     CD = true;
-                    StartCoroutine(Cooldown(0.5f));
+                    StartCoroutine(Cooldown(0.2f));
                     GameObject temp = Instantiate(PizzaProjectilePrefab);
                     temp.transform.position = Player.transform.position;
                     thrownPizzas.Add(temp);
                 }
-            }
-            //(Input.GetKey(KeyUp)|| (Input.GetKey(KeyUp))
-            if ((Input.GetKey(KeyCode.UpArrow)|| (Input.GetKey(KeyCode.RightArrow))) 
-                && !(Input.GetKey(KeyCode.DownArrow) || (Input.GetKey(KeyCode.LeftArrow))))
-            {
-                //Log("Moving character up");
-                movement.MoveUp();
-            } else if (!(Input.GetKey(KeyCode.UpArrow) || (Input.GetKey(KeyCode.RightArrow))) 
-                && (Input.GetKey(KeyCode.DownArrow) || (Input.GetKey(KeyCode.LeftArrow))))
-            {
-                //Log("Moving character down");
-                movement.MoveDown();
             }
         }
 
@@ -146,6 +134,25 @@ public class GameManager : MonoBehaviour
         flashlight.SetActive(hasPizza);
     }
 
+    void FixedUpdate()
+    {
+        if (paused)
+            return;
+
+            //(Input.GetKey(KeyUp)|| (Input.GetKey(KeyUp))
+        if ((Input.GetKey(KeyCode.UpArrow) || (Input.GetKey(KeyCode.RightArrow)))
+        && !(Input.GetKey(KeyCode.DownArrow) || (Input.GetKey(KeyCode.LeftArrow))))
+        {
+            //Log("Moving character up");
+            movement.MoveUp();
+        }
+        else if (!(Input.GetKey(KeyCode.UpArrow) || (Input.GetKey(KeyCode.RightArrow)))
+          && (Input.GetKey(KeyCode.DownArrow) || (Input.GetKey(KeyCode.LeftArrow))))
+        {
+            //Log("Moving character down");
+            movement.MoveDown();
+        }
+    }
     public void Log(string msg)
     {
         Debug.Log("Log: " + msg);
@@ -250,6 +257,7 @@ public class GameManager : MonoBehaviour
     IEnumerator Cooldown(float animDelay)
     {
         yield return new WaitForSeconds(animDelay);
+        Debug.Log("CD is false");
         CD = false;
     }
     public void AddPizzaConveyer(GameObject obj)

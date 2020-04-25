@@ -48,7 +48,8 @@ public class EnemySpawnerScript : MonoBehaviour
         {
             StartCoroutine(Spawn(Random.Range(0f, 1f)));
         }
-        StartCoroutine(Spawner(waveTime));
+        if (wave <= maxWaves)
+            StartCoroutine(Spawner(waveTime));
     }
 
     IEnumerator Spawn(float delay)
