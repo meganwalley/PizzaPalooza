@@ -10,10 +10,6 @@ public class GameManager : MonoBehaviour
     public Button QuitButton;
     public Button PauseButton;
     public Button ResumeButton;
-    public Button NewPizzaButton;
-    public Button ReleasePizzaButton;
-    public Button UpMovementButton;
-    public Button DownMovementButton;
     // Elements that change during the game.
     public Text Score;
     // Adding string keys so that players can have custom inputs.
@@ -28,10 +24,11 @@ public class GameManager : MonoBehaviour
     PlayerMovementScript movement;
     public GameObject ShopWalls;
     HealthScript health;
+
     bool paused = false;
     bool hasPizza = false;
     bool CD = false;
-    float points = 0;
+
     public GameObject pauseBackground;
     public GameObject PizzaProjectilePrefab;
     public GameObject flashlight;
@@ -46,10 +43,15 @@ public class GameManager : MonoBehaviour
     public List<GameObject> thrownPizzas;
     public List<GameObject> zombies;
 
+    float points = 0;
     private float second = 0.25f;
     private float pointsEverySecond = 0.01f;
 
-    // Start is called before the first frame update
+    // difficulty per level
+    public int difficulty = 1;
+    public int maxWaves = 10;
+    public int currentWave = 0;
+    public bool zen = false;
     void Start()
     {
         KeyPickUp = PlayerPrefs.GetString("PickUp", "a");
@@ -68,7 +70,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(PointIncrementalTime(3f));
     }
 
-    void Update()
+    void fixedUpdate()
     {
         // a to pick up
         // d to throw
@@ -88,8 +90,7 @@ public class GameManager : MonoBehaviour
             {
                 OnQuit();
             }
-        } else
-        {
+        } else {
             if (!CD)
             {
                 // if we are throwing or picking up, not both
@@ -136,7 +137,7 @@ public class GameManager : MonoBehaviour
 
         int currentHealth = health.currentHealth;
         DisplayHealth(currentHealth);
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 || currentWave == maxWaves)
         {
             StartCoroutine(GameOver());
         }

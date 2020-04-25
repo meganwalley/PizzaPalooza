@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayButton: {fileID: 2069572563}
   QuitButton: {fileID: 352472463}
-  firstScene: PlayScene
+  firstScene: IntroductionScene
 --- !u!1 &352472461
 GameObject:
   m_ObjectHideFlags: 0
