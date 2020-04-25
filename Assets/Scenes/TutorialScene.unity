@@ -2323,7 +2323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   anim: {fileID: 0}
-  moveSpeed: 2
+  moveSpeed: 1
 --- !u!50 &1016217849
 Rigidbody2D:
   serializedVersion: 4
@@ -3194,10 +3194,6 @@ MonoBehaviour:
   QuitButton: {fileID: 0}
   PauseButton: {fileID: 1726618140}
   ResumeButton: {fileID: 1502244116}
-  NewPizzaButton: {fileID: 0}
-  ReleasePizzaButton: {fileID: 0}
-  UpMovementButton: {fileID: 0}
-  DownMovementButton: {fileID: 0}
   Score: {fileID: 14683919}
   KeyThrow: d
   KeyPickUp: a
@@ -3217,6 +3213,10 @@ MonoBehaviour:
   ConveyerBeltPizzas: []
   thrownPizzas: []
   zombies: []
+  difficulty: 1
+  maxWaves: 10
+  currentWave: 0
+  zen: 0
 --- !u!4 &1454203055
 Transform:
   m_ObjectHideFlags: 0
@@ -4492,22 +4492,22 @@ MonoBehaviour:
   - {fileID: 486888100}
   - {fileID: 262605162}
   - {fileID: 1508670616}
-  enemyPrefabs:
+  enemyEasyPrefabs:
   - {fileID: 5995494962692338370, guid: 1fd9af968bdcdf74b87109fdc070a4f7, type: 3}
+  enemyMediumPrefabs:
   - {fileID: 5995494962692338370, guid: 1fd9af968bdcdf74b87109fdc070a4f7, type: 3}
+  enemyHardPrefabs:
   - {fileID: 5995494962692338370, guid: 1fd9af968bdcdf74b87109fdc070a4f7, type: 3}
-  - {fileID: 5995494962692338370, guid: 1fd9af968bdcdf74b87109fdc070a4f7, type: 3}
-  - {fileID: 5995494962692338370, guid: 1fd9af968bdcdf74b87109fdc070a4f7, type: 3}
-  - {fileID: 5995494962692338370, guid: 1fd9af968bdcdf74b87109fdc070a4f7, type: 3}
-  - {fileID: 5995494962692338370, guid: 1fd9af968bdcdf74b87109fdc070a4f7, type: 3}
-  - {fileID: 5995494962692338370, guid: 1fd9af968bdcdf74b87109fdc070a4f7, type: 3}
-  - {fileID: 5995494962692338370, guid: 1fd9af968bdcdf74b87109fdc070a4f7, type: 3}
+  enemyExtremePrefabs:
   - {fileID: 5995494962692338370, guid: 1fd9af968bdcdf74b87109fdc070a4f7, type: 3}
   main: {fileID: 1454203053}
   manager: {fileID: 0}
   waveTime: 8
   maxSpawnAtOnce: 3
   wave: 0
+  difficulty: 1
+  maxWaves: 10
+  zen: 0
 --- !u!4 &2066883793
 Transform:
   m_ObjectHideFlags: 0

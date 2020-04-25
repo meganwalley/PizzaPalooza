@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(PointIncrementalTime(3f));
     }
 
-    void fixedUpdate()
+    void Update()
     {
         // a to pick up
         // d to throw
@@ -137,10 +137,12 @@ public class GameManager : MonoBehaviour
 
         int currentHealth = health.currentHealth;
         DisplayHealth(currentHealth);
-        if (currentHealth <= 0 || currentWave == maxWaves)
+        if (currentHealth <= 0)
         {
             StartCoroutine(GameOver());
         }
+        if (zombies.Count == 0 && currentWave == maxWaves)
+            StartCoroutine(GameOver());
         flashlight.SetActive(hasPizza);
     }
 
