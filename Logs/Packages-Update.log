@@ -48,3 +48,11 @@ The following packages were updated:
   com.unity.2d.animation from version 4.1.0 to 4.1.1
   com.unity.2d.pixel-perfect from version 3.0.0 to 3.0.1
   com.unity.2d.spriteshape from version 4.0.0 to 4.0.2
+
+=== Fri Apr 10 00:26:11 2020
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.test-framework from version 1.1.11 to 1.1.13
