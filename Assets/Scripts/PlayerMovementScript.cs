@@ -17,14 +17,19 @@ public class PlayerMovementScript : MonoBehaviour
     {
         pizzas = new List<GameObject>();
         rb = this.GetComponent<Rigidbody2D>();
-    //    anim = this.GetComponent<Animator>();
+        anim = this.GetComponent<Animator>();
         speed = new Vector2(4.75f, 2.7425f); // 19, 10.97 -> 9.5, 5.485 -> 4.75, 2.7425
+    }
+    public void FixedUpdate()
+    {
+        anim.SetInteger("movement", 0);
     }
 
     public void MoveUp()
     {
         if (rightWall)
             return;
+        anim.SetInteger("movement", 1);
         rb.MovePosition(rb.position + speed * Time.deltaTime);
     }
 
@@ -32,6 +37,7 @@ public class PlayerMovementScript : MonoBehaviour
     {
         if (leftWall)
             return;
+        anim.SetInteger("movement", -1);
         rb.MovePosition(rb.position - speed * Time.deltaTime);
     }
 
@@ -44,6 +50,7 @@ public class PlayerMovementScript : MonoBehaviour
 
     public void Throw()
     {
+        anim.Play("jenny_throw");
         // needs to generate a pizza or is this just for the animation?
         // I'm thinking JUST for the animation.
     }
