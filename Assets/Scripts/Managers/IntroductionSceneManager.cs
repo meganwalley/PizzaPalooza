@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class IntroductionSceneManager : MonoBehaviour
 {
 
-    public string firstScene = "TutorialScene";
+    public string firstScene = "PlayScene";
     public string menuScene = "MenuScene";
     // Update is called once per frame
     void Update()

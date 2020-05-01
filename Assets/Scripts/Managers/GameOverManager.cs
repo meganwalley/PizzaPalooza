@@ -22,8 +22,14 @@ public class GameOverManager : MonoBehaviour
         NextSceneButton.onClick.AddListener(onRedo);
         MenuButton.onClick.AddListener(onQuit);
         ScoreText.text = data.score.ToString("$ 0.00");
-        if (data.winStatus)
-            TitleText.text = "Well done!";
+        if (data.playedTutorial && data.winStatus)
+        {
+            data.playedTutorial = true;
+            TitleText.text = "Good job on your first shift! Are you prepared for more?";
+        } else if (data.playedTutorial && !data.winStatus)
+            TitleText.text = "Nice try. Let's do that again to get the basics down!";
+        else if (data.winStatus)
+            TitleText.text = "Well done! But there's more shifts to go...!";
         else
             TitleText.text = "Time to be quarantined for two weeks. :(";
     }
@@ -35,7 +41,7 @@ public class GameOverManager : MonoBehaviour
         {
             onQuit();
         }
-        else if (Input.GetKey("shift"))
+        else if (Input.GetKey(KeyCode.LeftShift))
         {
             onRedo();
         }
@@ -51,7 +57,6 @@ public class GameOverManager : MonoBehaviour
     }
     public void onNextLevel()
     {
-        data.playedTutorial = true;
         data.lastScene = data.menuScene;
         // add some difficulty.
         if (data.wavesCap <= data.maxWaves)

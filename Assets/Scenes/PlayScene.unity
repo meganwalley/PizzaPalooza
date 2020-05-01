@@ -620,7 +620,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 021e16befdda6774b9bb53ad40add667, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1346,11 +1346,11 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.13550162, y: -0.17679301}
   - {x: 3.5283384, y: 1.9223268}
-  - {x: 5.2685843, y: 1.1221824}
+  - {x: 5.38154, y: 1.1625234}
   - {x: 1.792869, y: -0.96933025}
-  - {x: 1.1605136, y: -0.5721}
-  - {x: -0.9358983, y: -1.8062103}
-  - {x: -2.7493691, y: -0.7369209}
+  - {x: 1.1927867, y: -0.6447138}
+  - {x: -0.82294416, y: -1.8384831}
+  - {x: -2.7493691, y: -0.7369207}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -1414,7 +1414,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 418051369}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.335, y: -0.011, z: 0}
+  m_LocalPosition: {x: -3.85, y: 0.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1790,7 +1790,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: f713256137a143f4db042abb302fc7b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3421,13 +3421,30 @@ MonoBehaviour:
   - {fileID: 1952038934}
   - {fileID: 1718357532}
   enemyEasyPrefabs:
-  - {fileID: 5995494962692338370, guid: 1fd9af968bdcdf74b87109fdc070a4f7, type: 3}
+  - {fileID: 8362751066900030434, guid: dd6025f041161e944a63df688783ca25, type: 3}
+  - {fileID: 8362751066900030434, guid: dd6025f041161e944a63df688783ca25, type: 3}
+  - {fileID: 8362751066900030434, guid: dd6025f041161e944a63df688783ca25, type: 3}
+  - {fileID: 8362751066900030434, guid: dd6025f041161e944a63df688783ca25, type: 3}
+  - {fileID: 8362751066900030434, guid: dd6025f041161e944a63df688783ca25, type: 3}
+  - {fileID: 8362751066900030434, guid: dd6025f041161e944a63df688783ca25, type: 3}
+  - {fileID: 8362751066900030434, guid: dd6025f041161e944a63df688783ca25, type: 3}
+  - {fileID: 8362751066900030434, guid: dd6025f041161e944a63df688783ca25, type: 3}
+  - {fileID: 8362751066900030434, guid: dd6025f041161e944a63df688783ca25, type: 3}
+  - {fileID: 662020363942969982, guid: 8e171c1bcfe2d534ab9823c01142310f, type: 3}
   enemyMediumPrefabs:
-  - {fileID: 5995494962692338370, guid: 1fd9af968bdcdf74b87109fdc070a4f7, type: 3}
+  - {fileID: 8362751066900030434, guid: dd6025f041161e944a63df688783ca25, type: 3}
+  - {fileID: 8362751066900030434, guid: dd6025f041161e944a63df688783ca25, type: 3}
+  - {fileID: 662020363942969982, guid: 8e171c1bcfe2d534ab9823c01142310f, type: 3}
+  - {fileID: 662020363942969982, guid: 8e171c1bcfe2d534ab9823c01142310f, type: 3}
+  - {fileID: 662020363942969982, guid: 8e171c1bcfe2d534ab9823c01142310f, type: 3}
+  - {fileID: 502666630453946962, guid: 4140244f90871a24d96a2e905a272948, type: 3}
   enemyHardPrefabs:
-  - {fileID: 5995494962692338370, guid: 1fd9af968bdcdf74b87109fdc070a4f7, type: 3}
+  - {fileID: 662020363942969982, guid: 8e171c1bcfe2d534ab9823c01142310f, type: 3}
+  - {fileID: 502666630453946962, guid: 4140244f90871a24d96a2e905a272948, type: 3}
+  - {fileID: 502666630453946962, guid: 4140244f90871a24d96a2e905a272948, type: 3}
+  - {fileID: 502666630453946962, guid: 4140244f90871a24d96a2e905a272948, type: 3}
   enemyExtremePrefabs:
-  - {fileID: 5995494962692338370, guid: 1fd9af968bdcdf74b87109fdc070a4f7, type: 3}
+  - {fileID: 502666630453946962, guid: 4140244f90871a24d96a2e905a272948, type: 3}
   main: {fileID: 518894263}
   manager: {fileID: 0}
   waveTime: 8

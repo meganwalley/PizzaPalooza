@@ -14,6 +14,7 @@ public class EnemyScript : MonoBehaviour
     public int health = 1;
     public int damage = 1;
     public float worth = 2.5f;
+    bool dead = false;
     bool wall = false;
     // Update is called once per frame
     private void Start()
@@ -23,13 +24,10 @@ public class EnemyScript : MonoBehaviour
     }
     void Update()
     {
-        if (pause)
+        if (pause || wall || dead)
             return;
-        else if (wall)
-        {
-            // damage health
-            return;
-        }
+        //else if (wall)
+            // damage health when hitting a wall?
         rb.MovePosition(rb.position + speed * velocity * Time.deltaTime);
     }
     public void OnTriggerEnter2D(Collider2D collision)
@@ -37,10 +35,12 @@ public class EnemyScript : MonoBehaviour
         if (collision.gameObject.name.Contains("PizzaProjectile"))
         {
             --health;
+            anim.SetInteger("health", health);
             manager.DeleteGameObject(collision.gameObject);
             if (health <= 0)
             {
-                anim.SetBool("isDead", true);
+                this.GetComponent<CapsuleCollider2D>().enabled = false;
+                dead = true;
                 StartCoroutine(DelayDeath());
                 // delete the world
             }
