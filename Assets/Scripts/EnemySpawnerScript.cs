@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemySpawnerScript : MonoBehaviour
 {
+    PlayerData data;
+
     public List<GameObject> spawnPoints;
     public List<GameObject> enemyEasyPrefabs;
     public List<GameObject> enemyMediumPrefabs;
@@ -14,7 +16,7 @@ public class EnemySpawnerScript : MonoBehaviour
     public float waveTime;
     public int maxSpawnAtOnce;
 
-    public int wave = 0;
+    public int wave = 1;
     public int difficulty = 1;
     public int maxWaves = 10;
     public bool zen;
@@ -23,10 +25,11 @@ public class EnemySpawnerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        data = GameObject.FindObjectOfType<PlayerData>();
         manager = main.GetComponent<GameManager>();
-        difficulty = manager.difficulty;
-        maxWaves = manager.maxWaves;
-        zen = manager.zen;
+        difficulty = data.difficulty;
+        maxWaves = data.maxWaves;
+        zen = data.zenMode;
         if (zen)
             wave = 1;
     }
@@ -38,11 +41,11 @@ public class EnemySpawnerScript : MonoBehaviour
     IEnumerator Spawner(float del)
     {
         yield return new WaitForSeconds(del);
+        Debug.Log("Spawning wave #" + wave);
         if (!zen)
             wave++;
         manager.currentWave = wave;
 
-        Debug.Log("Spawning wave #" + wave);
         int temp = Random.Range(0, maxSpawnAtOnce);
         for (int i = 0; i <= temp; ++i)
         {

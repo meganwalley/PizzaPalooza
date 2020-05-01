@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+
+    PlayerData data;
     // Adding button objects to make this a potential uh. phone app? Who knows.
     public Button QuitButton;
     public Button PauseButton;
@@ -36,9 +38,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject HealthIndicator;
 
-    public string nextScene = "GameOverScene";
-    public string menuScene = "MenuScene";
-
     public List<GameObject> ConveyerBeltPizzas;
     public List<GameObject> thrownPizzas;
     public List<GameObject> zombies;
@@ -48,25 +47,33 @@ public class GameManager : MonoBehaviour
     private float pointsEverySecond = 0.01f;
 
     // difficulty per level
-    public int difficulty = 1;
-    public int maxWaves = 10;
+    int difficulty = 1;
+    int maxWaves = 10;
     public int currentWave = 0;
-    public bool zen = false;
+    bool zen = false;
     void Start()
     {
+        data = GameObject.FindObjectOfType<PlayerData>();
+        // load in level settings.
+        data.score = 0f;
+        difficulty = data.difficulty;
+        maxWaves = data.maxWaves;
+        zen = data.zenMode;
+
+        // player settings
         KeyPickUp = PlayerPrefs.GetString("PickUp", "a");
         KeyThrow = PlayerPrefs.GetString("Throw", "d");
         KeyUp = PlayerPrefs.GetString("Up", "w");
         KeyDown = PlayerPrefs.GetString("Down", "s");
         KeyEscape = PlayerPrefs.GetString("Escape", "escape");
         KeyQuit = PlayerPrefs.GetString("Quit", "q");
-
+        // important components
         movement = Player.GetComponent<PlayerMovementScript>();
         health = ShopWalls.GetComponent<HealthScript>();
-
+        // important listeners
         PauseButton.onClick.AddListener(Pause);
         ResumeButton.onClick.AddListener(Pause);
-
+        // let's get this party started!
         StartCoroutine(PointIncrementalTime(3f));
     }
 
@@ -127,10 +134,16 @@ public class GameManager : MonoBehaviour
         DisplayHealth(currentHealth);
         if (currentHealth <= 0)
         {
+            // lost
+            data.winStatus = false;
             StartCoroutine(GameOver());
         }
-        if (zombies.Count == 0 && currentWave == maxWaves)
+        if (zombies.Count == 0 && currentWave >= maxWaves)
+        {
+            // won
+            data.winStatus = true;
             StartCoroutine(GameOver());
+        }
         flashlight.SetActive(hasPizza);
     }
 
@@ -160,7 +173,7 @@ public class GameManager : MonoBehaviour
     public void OnQuit()
     {
         Debug.Log("Note: Moving from PlayScene to MenuScene");
-        SceneManager.LoadScene(menuScene);
+        SceneManager.LoadScene(data.menuScene);
     }
 
     public void Pause()
@@ -257,7 +270,6 @@ public class GameManager : MonoBehaviour
     IEnumerator Cooldown(float animDelay)
     {
         yield return new WaitForSeconds(animDelay);
-        Debug.Log("CD is false");
         CD = false;
     }
     public void AddPizzaConveyer(GameObject obj)
@@ -293,9 +305,11 @@ public class GameManager : MonoBehaviour
     IEnumerator GameOver()
     {
         yield return new WaitForSeconds(2f);
-        PlayerPrefs.SetFloat("Score", points);
-        Debug.Log("Note: Moving from PlayScene to " + nextScene);
-        SceneManager.LoadScene(nextScene);
+        data.score = points;
+        data.lastScene = SceneManager.GetActiveScene().name;
+//        PlayerPrefs.SetFloat("Score", points);
+        Debug.Log("Note: Moving from PlayScene to " + data.gameoverScene);
+        SceneManager.LoadScene(data.gameoverScene);
     }
 }
 

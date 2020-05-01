@@ -2037,6 +2037,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 570409548781679774, guid: 856410c2df1ec014aaa3453ecd63892f, type: 3}
   m_PrefabInstance: {fileID: 819305645}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &879455012
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 879455014}
+  - component: {fileID: 879455013}
+  m_Layer: 0
+  m_Name: PlayerData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &879455013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879455012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ac15a8cab1bef049844af2046c5379d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  zenMode: 0
+  playedTutorial: 0
+  winStatus: 0
+  lastScene: menuScene
+  nextScene: PlayScene
+  playScene: PlayScene
+  menuScene: menuScene
+  gameoverScene: GameOverScene
+  difficulty: 1
+  maxWaves: 10
+  baseWaves: 10
+  nextLevelWavesAdd: 10
+  wavesCap: 50
+--- !u!4 &879455014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879455012}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.10210933, y: 0.25569928, z: -6.049442}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &951249613
 GameObject:
   m_ObjectHideFlags: 0
@@ -2472,7 +2529,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1090315401}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0013, y: -0.0093, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.854465, y: 0.854465, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3208,15 +3265,10 @@ MonoBehaviour:
   flashlight: {fileID: 37002108}
   healthContainer: {fileID: 69537929}
   HealthIndicator: {fileID: 6098042795925056068, guid: 5d5953c3f75665248b1a387fd1a6a419, type: 3}
-  nextScene: GameOverScene
-  menuScene: MenuScene
   ConveyerBeltPizzas: []
   thrownPizzas: []
   zombies: []
-  difficulty: 1
-  maxWaves: 10
   currentWave: 0
-  zen: 0
 --- !u!4 &1454203055
 Transform:
   m_ObjectHideFlags: 0
@@ -4504,7 +4556,7 @@ MonoBehaviour:
   manager: {fileID: 0}
   waveTime: 8
   maxSpawnAtOnce: 3
-  wave: 0
+  wave: 1
   difficulty: 1
   maxWaves: 10
   zen: 0

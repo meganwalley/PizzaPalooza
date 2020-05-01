@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour
 {
-
+    PlayerData data;
     public Button PlayButton;
     public Button QuitButton;
     public string firstScene;
@@ -14,6 +14,7 @@ public class MenuScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        data = GameObject.FindObjectOfType<PlayerData>();
         PlayButton.onClick.AddListener(onPlay);
         QuitButton.onClick.AddListener(onQuit);
         PlayerPrefs.SetString("PickUp", "space");
@@ -22,6 +23,9 @@ public class MenuScript : MonoBehaviour
         PlayerPrefs.SetString("Down", "s");
         PlayerPrefs.SetString("Escape", "escape");
         PlayerPrefs.SetString("Quit", "q");
+        // reset all difficulty values.
+        data.difficulty = 1;
+        data.maxWaves = data.baseWaves;
     }
 
     // Update is called once per frame
