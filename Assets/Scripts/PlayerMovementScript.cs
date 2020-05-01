@@ -94,7 +94,6 @@ public class PlayerMovementScript : MonoBehaviour
         {
             closestPizza = Closer(closestPizza, pizza);
         }
-
         return closestPizza;
     }
 

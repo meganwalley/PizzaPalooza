@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6b499d3fa3dab4fbbab5eb9327fcf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstScene: TutorialScene
+  firstScene: PlayScene
   menuScene: MenuScene
 --- !u!1 &372030632
 GameObject:
@@ -197,7 +197,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac15a8cab1bef049844af2046c5379d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
   zenMode: 0
   playedTutorial: 0
   winStatus: 0
@@ -206,11 +205,12 @@ MonoBehaviour:
   playScene: PlayScene
   menuScene: menuScene
   gameoverScene: GameOverScene
-  difficulty: 1
-  maxWaves: 10
   baseWaves: 10
   nextLevelWavesAdd: 10
   wavesCap: 50
+  score: 0
+  difficulty: 1
+  maxWaves: 10
 --- !u!4 &372030634
 Transform:
   m_ObjectHideFlags: 0

@@ -1512,7 +1512,10 @@ MonoBehaviour:
   Player: {fileID: 235814248}
   ShopWalls: {fileID: 418051369}
   pauseBackground: {fileID: 1342162690}
-  PizzaProjectilePrefab: {fileID: 1887715764913424203, guid: f07a6c4541dc51a4ebbe8c552a7533a0, type: 3}
+  CheesePizzaProjectilePrefab: {fileID: 1887715764913424203, guid: f07a6c4541dc51a4ebbe8c552a7533a0, type: 3}
+  PepperoniPizzaProjectilePrefab: {fileID: 6295281464764099443, guid: dcde1503961bf0e4b9f3624c6b6d2748, type: 3}
+  BBQPizzaProjectilePrefab: {fileID: 38664977399816912, guid: be6f2a1bb92332a4d86220ed4f932382, type: 3}
+  SupremePizzaProjectilePrefab: {fileID: 2126448544238295873, guid: 9fc4d47c6bf049642a4a8a376d9b1606, type: 3}
   flashlight: {fileID: 2137156463}
   healthContainer: {fileID: 610713424}
   HealthIndicator: {fileID: 6098042795925056068, guid: 5d5953c3f75665248b1a387fd1a6a419, type: 3}
@@ -2135,7 +2138,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   main: {fileID: 518894263}
   manager: {fileID: 0}
-  PizzaCollectiblePrefab: {fileID: 3545902754752306466, guid: 7cd2efc31cf9a194496f76445d7ac7dc, type: 3}
+  PizzaCollectibleCheesePrefab: {fileID: 3545902754752306466, guid: 7cd2efc31cf9a194496f76445d7ac7dc, type: 3}
+  PizzaCollectiblePepperoniPrefab: {fileID: 506939344740424427, guid: 77a1dfacf63303f47a62559460fbb0e4, type: 3}
+  PizzaCollectibleBBQPrefab: {fileID: 2382720926215013100, guid: eb3f799745d840047bff9d548f7b09c3, type: 3}
+  PizzaCollectibleSupremePrefab: {fileID: 2455928012329755393, guid: 83723f552024e62459a0ad9553dd9249, type: 3}
   delay: 2.5
 --- !u!61 &914445069
 BoxCollider2D:
@@ -3662,7 +3668,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac15a8cab1bef049844af2046c5379d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
   zenMode: 0
   playedTutorial: 0
   winStatus: 0
@@ -3671,11 +3676,16 @@ MonoBehaviour:
   playScene: PlayScene
   menuScene: menuScene
   gameoverScene: GameOverScene
-  difficulty: 1
-  maxWaves: 10
   baseWaves: 10
   nextLevelWavesAdd: 10
   wavesCap: 50
+  score: 0
+  difficulty: 1
+  maxWaves: 10
+  pizzaHeld: none
+  unlockPizzaPepperoni: 1
+  unlockPizzaBBQ: 1
+  unlockPizzaSupreme: 1
 --- !u!4 &1595748782
 Transform:
   m_ObjectHideFlags: 0

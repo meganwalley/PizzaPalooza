@@ -10,6 +10,7 @@ public class PizzaCollectibleScript : MonoBehaviour
     Vector2 rotation;
     bool rotated = false;
     public bool pause = false;
+    public string pizzaType = "cheese";
     // Update is called once per frame
     private void Start()
     {

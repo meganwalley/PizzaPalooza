@@ -32,7 +32,10 @@ public class GameManager : MonoBehaviour
     bool CD = false;
 
     public GameObject pauseBackground;
-    public GameObject PizzaProjectilePrefab;
+    public GameObject CheesePizzaProjectilePrefab;
+    public GameObject PepperoniPizzaProjectilePrefab;
+    public GameObject BBQPizzaProjectilePrefab;
+    public GameObject SupremePizzaProjectilePrefab;
     public GameObject flashlight;
     public HorizontalLayoutGroup healthContainer;
 
@@ -109,6 +112,7 @@ public class GameManager : MonoBehaviour
                     {
                         movement.PickUp(grabbedPizza);
                         DeleteGameObject(grabbedPizza);
+                        data.pizzaHeld = grabbedPizza.name.Replace("PizzaCollectible", "").Replace("(Clone)", "");
                         hasPizza = true;
                         //Pizza.color = new Color(Pizza.color.r, Pizza.color.g, Pizza.color.b, 1);
                         CD = true;
@@ -123,7 +127,7 @@ public class GameManager : MonoBehaviour
                     //Pizza.color = new Color(Pizza.color.r, Pizza.color.g, Pizza.color.b, 0);
                     CD = true;
                     StartCoroutine(Cooldown(0.2f));
-                    GameObject temp = Instantiate(PizzaProjectilePrefab);
+                    GameObject temp = Instantiate(getPizzaProjectile());
                     temp.transform.position = Player.transform.position;
                     thrownPizzas.Add(temp);
                 }
@@ -145,6 +149,22 @@ public class GameManager : MonoBehaviour
             StartCoroutine(GameOver());
         }
         flashlight.SetActive(hasPizza);
+    }
+
+    private GameObject getPizzaProjectile()
+    {
+        switch(data.pizzaHeld)
+        {
+            case "Pepperoni":
+                return PepperoniPizzaProjectilePrefab;
+            case "BBQ":
+                return BBQPizzaProjectilePrefab;
+            case "Supreme":
+                return SupremePizzaProjectilePrefab;
+            case "Cheese":
+            default:
+                return CheesePizzaProjectilePrefab;
+        }
     }
 
     void FixedUpdate()

@@ -8,6 +8,10 @@ public class IntroductionSceneManager : MonoBehaviour
 
     public string firstScene = "PlayScene";
     public string menuScene = "MenuScene";
+    private void Awake()
+    {
+        StartCoroutine(AutoMoveOn(10f));
+    }
     // Update is called once per frame
     void Update()
     {
@@ -31,5 +35,11 @@ public class IntroductionSceneManager : MonoBehaviour
     {
         Debug.Log("Note: Moving from IntroductionScene to " + menuScene);
         SceneManager.LoadScene(menuScene);
+    }
+
+    IEnumerator AutoMoveOn(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        onPlay();
     }
 }
