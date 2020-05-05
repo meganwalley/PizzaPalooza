@@ -17,7 +17,7 @@ public class PizzaCollectibleScript : MonoBehaviour
         rotation = new Vector2(-velocity.x, velocity.y);
         rb = this.GetComponent<Rigidbody2D>();
     }
-    void Update()
+    void FixedUpdate()
     {
         if (pause)
             return;

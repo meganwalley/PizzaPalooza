@@ -40,11 +40,44 @@ public class PlayerData : MonoBehaviour
     public int difficulty = 1;
     public int maxWaves = 10;
     public string pizzaHeld = "none";
+    public int health;
 
     // upgrades
+    public  float costPizzaPepperoni = 100f;
+    public  float costPizzaBBQ = 200f;
+    public  float costPizzaHawaiian = 300f;
+    public  float costPizzaSupreme = 500f;
+    public  float costZombieCautionTape = 400f;
+    public  float costZombieClosedSign = 150f;
+    public  float costBeltOil = 100f;
+    public  float costBeltGears = 100f;
+    public  float costBeltFire = 400f;
+    public  float costBeltReplace = 300f;
+    public  float costHealthMop = 100f;
+    public  float costHealthSoap = 200f;
+    public  float costHealthGloves = 500f;
+    public  float costHealthMask = 300f;
+    public  float costHealth = 50f;
+
     public bool unlockPizzaPepperoni = true;
-    public bool unlockPizzaBBQ = true;
-    public bool unlockPizzaSupreme = true;
+    public bool unlockPizzaBBQ = false;
+    public bool unlockPizzaSupreme = false;
+    public bool unlockPizzaHawaiian = false;
+    public bool unlockZombieCautionTape = false;
+    public bool unlockZombieClosedSign = false;
+    public bool unlockBeltOil = false;
+    public bool unlockBeltGears = false;
+    public bool unlockBeltFire = false;
+    public bool unlockBeltReplace = false;
+    public bool unlockHealthMop = false;
+    public bool unlockHealthSoap = false;
+    public bool unlockHealthGloves = false;
+    public bool unlockHealthMask = false;
+
+    public float purchaseBatteryTimer = 30f;
+    public float purchaseHealth;
+
+    // slows down how often you get hit?
     public void GameReset()
     {
         score = 0f;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthScript : MonoBehaviour
 {
-
+    PlayerData data;
     public float delayTime = 2f;
     public bool pause = false;
     bool canBeDamaged = true;
@@ -13,6 +13,7 @@ public class HealthScript : MonoBehaviour
     List<EnemyScript> enemiesTouching;
     public void Start()
     {
+        data = GameObject.FindObjectOfType<PlayerData>();
         currentHealth = maxHealth;
         enemiesTouching = new List<EnemyScript>();
     }
@@ -46,7 +47,7 @@ public class HealthScript : MonoBehaviour
         yield return new WaitForSeconds(delay);
         if (!pause)
             Damage();
-        StartCoroutine(DamageCooldown(delay));
+        StartCoroutine(DamageCooldown(UpdatedDelayTime(delay)));
     }
 
     void Damage()
@@ -60,5 +61,18 @@ public class HealthScript : MonoBehaviour
                 currentHealth -= es.GetDamage();
             }
         }
+    }
+
+    float UpdatedDelayTime(float delay)
+    {
+        if (data.unlockHealthGloves)
+            delay += 0.4f;
+        if (data.unlockHealthMask)
+            delay += 0.3f;
+        if (data.unlockHealthMop)
+            delay += 0.2f;
+        if (data.unlockHealthSoap)
+            delay += 0.1f;
+        return delay;
     }
 }

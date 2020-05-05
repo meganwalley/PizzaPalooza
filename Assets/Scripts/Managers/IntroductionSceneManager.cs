@@ -10,7 +10,7 @@ public class IntroductionSceneManager : MonoBehaviour
     public string menuScene = "MenuScene";
     private void Awake()
     {
-        StartCoroutine(AutoMoveOn(10f));
+        StartCoroutine(AutoMoveOn(15f));
     }
     // Update is called once per frame
     void Update()
@@ -19,7 +19,7 @@ public class IntroductionSceneManager : MonoBehaviour
         {
             onQuit();
         }
-        else if (Input.GetKey("space"))
+        else if (Input.GetKey("enter"))
         {
             onPlay();
         }

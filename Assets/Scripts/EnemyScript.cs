@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+    PlayerData data;
     public Rigidbody2D rb;
     public GameManager manager;
     public Animator anim;
@@ -21,22 +22,35 @@ public class EnemyScript : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody2D>();
         anim = this.GetComponent<Animator>();
+        data = GameObject.FindObjectOfType<PlayerData>();
     }
-    void Update()
+    void FixedUpdate()
     {
         if (pause || wall || dead)
             return;
         //else if (wall)
-            // damage health when hitting a wall?
-        rb.MovePosition(rb.position + speed * velocity * Time.deltaTime);
+        // damage health when hitting a wall?
+        float newSpeed = speed;
+        if (data.unlockZombieCautionTape)
+            newSpeed -= 0.15f;
+        rb.MovePosition(rb.position + newSpeed * velocity * Time.deltaTime);
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name.Contains("PizzaProjectile"))
         {
+            if (collision.gameObject.name.Contains("Hawaiian") || collision.gameObject.name.Contains("Supreme"))
+                --health;
             --health;
             anim.SetInteger("health", health);
-            manager.DeleteGameObject(collision.gameObject);
+            if (collision.gameObject.name.Contains("BBQ"))
+            {
+                collision.gameObject.name.Replace("BBQ", "UsedBB");
+                collision.gameObject.GetComponent<PizzaProjectileScript>().BBQ();
+
+            }
+            else
+                manager.DeleteGameObject(collision.gameObject);
             if (health <= 0)
             {
                 this.GetComponent<CapsuleCollider2D>().enabled = false;

@@ -13,7 +13,7 @@ public class EnemySpawnerScript : MonoBehaviour
     public List<GameObject> enemyExtremePrefabs;
     public GameObject main;
     public GameManager manager;
-    public float waveTime;
+    public float waveTime = 8f;
     public int maxSpawnAtOnce;
 
     public int wave = 1;
@@ -42,7 +42,7 @@ public class EnemySpawnerScript : MonoBehaviour
     {
         yield return new WaitForSeconds(del);
         Debug.Log("Spawning wave #" + wave);
-        if (!zen)
+        if (!zen && !manager.IsPaused())
             wave++;
         manager.currentWave = wave;
 
@@ -51,8 +51,9 @@ public class EnemySpawnerScript : MonoBehaviour
         {
             StartCoroutine(Spawn(Random.Range(0f, 1f)));
         }
+        // ZOMBIE CLOSED SIGN IS APPLIED HERE
         if (wave <= maxWaves)
-            StartCoroutine(Spawner(waveTime));
+            StartCoroutine(Spawner(waveTime + ((data.unlockZombieClosedSign ? 1: 0) * 0.5f) - (0.5f * (difficulty - 1))));
     }
 
     IEnumerator Spawn(float delay)
@@ -206,10 +207,6 @@ public class EnemySpawnerScript : MonoBehaviour
             // easy mobs the first 12%
             if (wave < maxWaves / 8)
             {
-                return enemyEasyPrefabs[Random.Range(0, enemyEasyPrefabs.Count)];
-            }
-            else if (wave < (2 * maxWaves) / 8)
-            {
                 // mix of medium and easy mobs the next 12%
                 if (Random.Range(0, 2) < 1)
                 {
@@ -220,9 +217,8 @@ public class EnemySpawnerScript : MonoBehaviour
                     return enemyMediumPrefabs[Random.Range(0, enemyMediumPrefabs.Count)];
                 }
             }
-            else if (wave < (3 * maxWaves) / 8)
+            else if (wave < (2 * maxWaves) / 8)
             {
-                // mix of medium and easy mobs the next 12%
                 int mobDifficulty = Random.Range(0, 3);
                 switch (mobDifficulty)
                 {
@@ -235,9 +231,9 @@ public class EnemySpawnerScript : MonoBehaviour
                         return enemyEasyPrefabs[Random.Range(0, enemyEasyPrefabs.Count)];
                 }
             }
-            else if (wave < (maxWaves) / 2)
+            else if (wave < (3 * maxWaves) / 8)
             {
-                // mix of medium and hard mobs the next 12%
+                // mix of medium and easy mobs the next 12%
                 if (Random.Range(0, 2) < 1)
                 {
                     return enemyHardPrefabs[Random.Range(0, enemyHardPrefabs.Count)];
@@ -247,11 +243,21 @@ public class EnemySpawnerScript : MonoBehaviour
                     return enemyMediumPrefabs[Random.Range(0, enemyMediumPrefabs.Count)];
                 }
             }
-            else if (wave < (5 * maxWaves) / 8)
+            else if (wave < (maxWaves) / 2)
             {
-                return enemyHardPrefabs[Random.Range(0, enemyHardPrefabs.Count)];
+                int mobDifficulty = Random.Range(0, 3);
+                switch (mobDifficulty)
+                {
+                    case 2:
+                        return enemyHardPrefabs[Random.Range(0, enemyHardPrefabs.Count)];
+                    case 1:
+                        return enemyMediumPrefabs[Random.Range(0, enemyMediumPrefabs.Count)];
+                    case 0:
+                    default:
+                        return enemyExtremePrefabs[Random.Range(0, enemyExtremePrefabs.Count)];
+                }
             }
-            else if (wave < (7 * maxWaves)/8)
+            else if (wave < (5 * maxWaves) / 8)
             {
                 // mix of medium and hard mobs the next 12%
                 if (Random.Range(0, 2) < 1)

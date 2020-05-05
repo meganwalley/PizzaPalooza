@@ -69,6 +69,9 @@ public class PizzaCollectibleSpawner : MonoBehaviour
         } else if (data.unlockPizzaPepperoni && pizza >= 65)
         {
             return PizzaCollectiblePepperoniPrefab;
+        } else if (data.unlockPizzaHawaiian && pizza < 10)
+        {
+            return PizzaCollectibleCheesePrefab;
         } else
         {
             return PizzaCollectibleCheesePrefab;
@@ -79,10 +82,29 @@ public class PizzaCollectibleSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(del);
         Spawn();
-        StartCoroutine(Spawner(del));
+        StartCoroutine(Spawner(NewDelayTime(delay)));
     }
     IEnumerator Wait(float del)
     {
         yield return new WaitForSeconds(del);
+    }
+
+    float NewDelayTime(float delay)
+    {
+        if (data.unlockBeltOil)
+        {
+            delay -= 0.1f;
+        }
+        if (data.unlockBeltGears) {
+            delay -= 0.1f;
+        }
+        if (data.unlockBeltReplace)
+        {
+            delay -= 0.2f;
+        }
+        if (data.unlockBeltFire) {
+            delay -= 0.2f;
+        }
+        return delay;
     }
 }

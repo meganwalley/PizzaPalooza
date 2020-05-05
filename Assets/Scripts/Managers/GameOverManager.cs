@@ -26,10 +26,17 @@ public class GameOverManager : MonoBehaviour
         {
             data.playedTutorial = true;
             TitleText.text = "Good job on your first shift! Are you prepared for more?";
-        } else if (data.playedTutorial && !data.winStatus)
+        }
+        else if (data.playedTutorial && !data.winStatus)
+        {
             TitleText.text = "Nice try. Let's do that again to get the basics down!";
+            NextSceneButton.gameObject.SetActive(false);
+        }
         else if (data.winStatus)
+        {
             TitleText.text = "Well done! But there's more shifts to go...!";
+            LastSceneButton.gameObject.SetActive(false);
+        }
         else
             TitleText.text = "Time to be quarantined for two weeks. :(";
     }
@@ -45,7 +52,7 @@ public class GameOverManager : MonoBehaviour
         {
             onRedo();
         }
-        else if (Input.GetKey("space"))
+        else if (Input.GetKey("enter"))
         {
             onNextLevel();
         }

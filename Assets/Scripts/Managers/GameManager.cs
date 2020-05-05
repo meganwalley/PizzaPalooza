@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
 
     PlayerData data;
+    ClockScript clock;
     // Adding button objects to make this a potential uh. phone app? Who knows.
     public Button QuitButton;
     public Button PauseButton;
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
     bool hasPizza = false;
     bool CD = false;
 
-    public GameObject pauseBackground;
+    public GameObject PauseObject;
     public GameObject CheesePizzaProjectilePrefab;
     public GameObject PepperoniPizzaProjectilePrefab;
     public GameObject BBQPizzaProjectilePrefab;
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> thrownPizzas;
     public List<GameObject> zombies;
 
-    float points = 0;
+    public float points = 0;
     private float second = 0.25f;
     private float pointsEverySecond = 0.01f;
 
@@ -57,6 +58,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         data = GameObject.FindObjectOfType<PlayerData>();
+        clock = GameObject.FindObjectOfType<ClockScript>();
+        clock.difficulty = difficulty;
+        clock.level = 1 + ((data.maxWaves - data.baseWaves) / data.nextLevelWavesAdd);
         // load in level settings.
         data.score = 0f;
         difficulty = data.difficulty;
@@ -89,7 +93,7 @@ public class GameManager : MonoBehaviour
         // esc to pause
         // r to resume
         // q to quit
-
+        clock.wave = this.currentWave;
         if (Input.GetKeyUp(KeyEscape))
         {
             Pause();
@@ -134,6 +138,11 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyUp("\\"))
+        {
+            points += 100;
+        }
+
         int currentHealth = health.currentHealth;
         DisplayHealth(currentHealth);
         if (currentHealth <= 0)
@@ -145,6 +154,7 @@ public class GameManager : MonoBehaviour
         if (zombies.Count == 0 && currentWave >= maxWaves)
         {
             // won
+            data.health = health.currentHealth;
             data.winStatus = true;
             StartCoroutine(GameOver());
         }
@@ -207,7 +217,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Note: Pause " + paused);
         PauseButton.gameObject.SetActive(!paused);
         ResumeButton.gameObject.SetActive(paused);
-        pauseBackground.SetActive(paused);
+        PauseObject.SetActive(paused);
         health.pause = paused;
 
         foreach (GameObject o in ConveyerBeltPizzas)
@@ -320,6 +330,12 @@ public class GameManager : MonoBehaviour
             GameObject temp = Instantiate(HealthIndicator);
             temp.transform.SetParent(healthContainer.transform);
         }
+    }
+
+    public void AddHealth(int i)
+    {
+        health.currentHealth += i;
+        DisplayHealth(health.currentHealth);
     }
     
     IEnumerator GameOver()
