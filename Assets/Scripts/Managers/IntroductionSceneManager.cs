@@ -19,7 +19,7 @@ public class IntroductionSceneManager : MonoBehaviour
         {
             onQuit();
         }
-        else if (Input.GetKey("enter"))
+        else if (Input.GetKey(KeyCode.Return))
         {
             onPlay();
         }

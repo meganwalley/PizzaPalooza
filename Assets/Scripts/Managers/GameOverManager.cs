@@ -51,11 +51,11 @@ public class GameOverManager : MonoBehaviour
         {
             onQuit();
         }
-        else if (Input.GetKey(KeyCode.LeftShift))
+        else if (Input.GetKey(KeyCode.Return) && !data.winStatus)
         {
             onRedo();
         }
-        else if (Input.GetKey("enter"))
+        else if (Input.GetKey(KeyCode.Return) && data.winStatus)
         {
             onNextLevel();
         }

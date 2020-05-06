@@ -654,6 +654,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: bebf6827bd76a7d4398893fe0f10850c, type: 3}
+    - target: {fileID: 6107041879856000963, guid: 7aee63f94f877cf49bfa13fcc7d83c67, type: 3}
+      propertyPath: m_Text
+      value: $ 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6107041880222040314, guid: 7aee63f94f877cf49bfa13fcc7d83c67, type: 3}
       propertyPath: m_Text
       value: More chores, but you'll be at risk a little bit less often.

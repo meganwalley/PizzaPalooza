@@ -16,7 +16,7 @@ public class EnemySpawnerScript : MonoBehaviour
     public float waveTime = 8f;
     public int maxSpawnAtOnce;
 
-    public int wave = 1;
+    public int wave = 0;
     public int difficulty = 1;
     public int maxWaves = 10;
     public bool zen;
@@ -41,9 +41,9 @@ public class EnemySpawnerScript : MonoBehaviour
     IEnumerator Spawner(float del)
     {
         yield return new WaitForSeconds(del);
-        Debug.Log("Spawning wave #" + wave);
         if (!zen && !manager.IsPaused())
             wave++;
+        Debug.Log("Spawning wave #" + wave);
         manager.currentWave = wave;
 
         // ZOMBIE CLOSED SIGN IS APPLIED HERE
