@@ -206,11 +206,44 @@ MonoBehaviour:
   menuScene: menuScene
   gameoverScene: GameOverScene
   baseWaves: 10
-  nextLevelWavesAdd: 10
-  wavesCap: 50
+  nextLevelWavesAdd: 5
+  wavesCap: 25
   score: 0
   difficulty: 1
   maxWaves: 10
+  pizzaHeld: none
+  health: 0
+  costPizzaPepperoni: 100
+  costPizzaBBQ: 200
+  costPizzaHawaiian: 300
+  costPizzaSupreme: 500
+  costZombieCautionTape: 400
+  costZombieClosedSign: 150
+  costBeltOil: 100
+  costBeltGears: 100
+  costBeltFire: 400
+  costBeltReplace: 300
+  costHealthMop: 100
+  costHealthSoap: 200
+  costHealthGloves: 500
+  costHealthMask: 300
+  costHealth: 50
+  unlockPizzaPepperoni: 0
+  unlockPizzaBBQ: 0
+  unlockPizzaSupreme: 0
+  unlockPizzaHawaiian: 0
+  unlockZombieCautionTape: 0
+  unlockZombieClosedSign: 0
+  unlockBeltOil: 0
+  unlockBeltGears: 0
+  unlockBeltFire: 0
+  unlockBeltReplace: 0
+  unlockHealthMop: 0
+  unlockHealthSoap: 0
+  unlockHealthGloves: 0
+  unlockHealthMask: 0
+  purchaseBatteryTimer: 30
+  purchaseHealth: 0
 --- !u!4 &372030634
 Transform:
   m_ObjectHideFlags: 0

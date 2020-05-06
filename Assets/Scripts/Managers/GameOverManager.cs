@@ -18,8 +18,8 @@ public class GameOverManager : MonoBehaviour
     {
         data = GameObject.FindObjectOfType<PlayerData>();
         NextSceneButton.enabled = data.winStatus;
-        LastSceneButton.onClick.AddListener(onNextLevel);
-        NextSceneButton.onClick.AddListener(onRedo);
+        LastSceneButton.onClick.AddListener(onRedo);
+        NextSceneButton.onClick.AddListener(onNextLevel);
         MenuButton.onClick.AddListener(onQuit);
         ScoreText.text = data.score.ToString("$ 0.00");
         if (data.playedTutorial && data.winStatus)
@@ -38,7 +38,10 @@ public class GameOverManager : MonoBehaviour
             LastSceneButton.gameObject.SetActive(false);
         }
         else
+        {
             TitleText.text = "Time to be quarantined for two weeks. :(";
+            NextSceneButton.gameObject.SetActive(false);
+        }
     }
 
     // Update is called once per frame

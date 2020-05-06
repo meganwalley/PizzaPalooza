@@ -11,6 +11,7 @@ public class PizzaCollectibleSpawner : MonoBehaviour
     public GameObject PizzaCollectiblePepperoniPrefab;
     public GameObject PizzaCollectibleBBQPrefab;
     public GameObject PizzaCollectibleSupremePrefab;
+    public GameObject PizzaCollectibleHawaiianPrefab;
     public float delay = 2f;
 
     // Start is called before the first frame update
@@ -71,7 +72,7 @@ public class PizzaCollectibleSpawner : MonoBehaviour
             return PizzaCollectiblePepperoniPrefab;
         } else if (data.unlockPizzaHawaiian && pizza < 10)
         {
-            return PizzaCollectibleCheesePrefab;
+            return PizzaCollectibleHawaiianPrefab;
         } else
         {
             return PizzaCollectibleCheesePrefab;

@@ -46,14 +46,16 @@ public class EnemySpawnerScript : MonoBehaviour
             wave++;
         manager.currentWave = wave;
 
-        int temp = Random.Range(0, maxSpawnAtOnce);
-        for (int i = 0; i <= temp; ++i)
-        {
-            StartCoroutine(Spawn(Random.Range(0f, 1f)));
-        }
         // ZOMBIE CLOSED SIGN IS APPLIED HERE
         if (wave <= maxWaves)
-            StartCoroutine(Spawner(waveTime + ((data.unlockZombieClosedSign ? 1: 0) * 0.5f) - (0.5f * (difficulty - 1))));
+        {
+            StartCoroutine(Spawner(waveTime + ((data.unlockZombieClosedSign ? 1 : 0) * 0.5f) - (0.5f * (difficulty - 1))));
+            int temp = Random.Range(0, maxSpawnAtOnce);
+            for (int i = 0; i <= temp; ++i)
+            {
+                StartCoroutine(Spawn(Random.Range(0f, 1f)));
+            }
+        }
     }
 
     IEnumerator Spawn(float delay)

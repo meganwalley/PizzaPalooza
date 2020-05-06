@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     public GameObject PepperoniPizzaProjectilePrefab;
     public GameObject BBQPizzaProjectilePrefab;
     public GameObject SupremePizzaProjectilePrefab;
+    public GameObject HawaiianPizzaProjectilePrefab;
     public GameObject flashlight;
     public HorizontalLayoutGroup healthContainer;
 
@@ -62,7 +63,8 @@ public class GameManager : MonoBehaviour
         clock.difficulty = difficulty;
         clock.level = 1 + ((data.maxWaves - data.baseWaves) / data.nextLevelWavesAdd);
         // load in level settings.
-        data.score = 0f;
+        // data.score = 0f;
+        points = data.score;
         difficulty = data.difficulty;
         maxWaves = data.maxWaves;
         zen = data.zenMode;
@@ -171,6 +173,8 @@ public class GameManager : MonoBehaviour
                 return BBQPizzaProjectilePrefab;
             case "Supreme":
                 return SupremePizzaProjectilePrefab;
+            case "Hawaiian":
+                return HawaiianPizzaProjectilePrefab;
             case "Cheese":
             default:
                 return CheesePizzaProjectilePrefab;

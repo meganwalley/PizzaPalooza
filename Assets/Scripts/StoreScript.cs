@@ -42,6 +42,9 @@ public class StoreScript : MonoBehaviour
     public GameObject holderHealthMask;
     public Button buyHealthMask;
 
+    public SpriteRenderer imageZombieClosedSign;
+    public SpriteRenderer imageZombieCautionTape;
+
 
     // Start is called before the first frame update
     void Start()
@@ -261,5 +264,8 @@ public class StoreScript : MonoBehaviour
         holderZombieCautionTape.SetActive(!data.unlockZombieCautionTape && data.unlockZombieClosedSign);
         // slows waves by .2f - implemented
         holderZombieClosedSign.SetActive(!data.unlockZombieClosedSign);
+
+        imageZombieCautionTape.enabled = data.unlockZombieCautionTape;
+        imageZombieClosedSign.enabled = data.unlockZombieClosedSign;
     }
 }
