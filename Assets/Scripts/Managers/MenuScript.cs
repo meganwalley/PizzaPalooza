@@ -45,6 +45,7 @@ public class MenuScript : MonoBehaviour
         // reset all difficulty values.
         data.difficulty = 1;
         data.maxWaves = data.baseWaves;
+        data.score = 0f;
 
         menuButton();
     }

@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
         // load in level settings.
         // data.score = 0f;
         points = data.score;
+        Score.text = points.ToString("$ 0.00");
         difficulty = data.difficulty;
         maxWaves = data.maxWaves;
         zen = data.zenMode;

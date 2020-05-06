@@ -37,6 +37,7 @@ public class PlayerData : MonoBehaviour
 
     // data that might change regularly
     public float score = 0f;
+    public float lastScore = 0f;
     public int difficulty = 1;
     public int maxWaves = 10;
     public string pizzaHeld = "none";
@@ -73,6 +74,8 @@ public class PlayerData : MonoBehaviour
     public bool unlockHealthSoap = false;
     public bool unlockHealthGloves = false;
     public bool unlockHealthMask = false;
+
+
 
     public float purchaseBatteryTimer = 30f;
     public float purchaseHealth;

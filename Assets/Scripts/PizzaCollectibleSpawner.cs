@@ -64,10 +64,10 @@ public class PizzaCollectibleSpawner : MonoBehaviour
         if (data.unlockPizzaSupreme && pizza >= 95)
         {
             return PizzaCollectibleSupremePrefab;
-        } else if (data.unlockPizzaBBQ && pizza >= 82)
+        } else if (data.unlockPizzaBBQ && pizza >= 80 && pizza < 95)
         {
             return PizzaCollectibleBBQPrefab;
-        } else if (data.unlockPizzaPepperoni && pizza >= 65)
+        } else if (data.unlockPizzaPepperoni && pizza >= 55 && pizza < 80)
         {
             return PizzaCollectiblePepperoniPrefab;
         } else if (data.unlockPizzaHawaiian && pizza < 10)

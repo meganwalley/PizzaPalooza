@@ -24,21 +24,26 @@ public class GameOverManager : MonoBehaviour
         ScoreText.text = data.score.ToString("$ 0.00");
         if (data.playedTutorial && data.winStatus)
         {
+            data.lastScore = data.score;
             data.playedTutorial = true;
             TitleText.text = "Good job on your first shift! Are you prepared for more?";
         }
         else if (data.playedTutorial && !data.winStatus)
         {
+            // didn't win.
+            data.score = data.lastScore;
             TitleText.text = "Nice try. Let's do that again to get the basics down!";
             NextSceneButton.gameObject.SetActive(false);
         }
         else if (data.winStatus)
         {
+            data.lastScore = data.score;
             TitleText.text = "Well done! But there's more shifts to go...!";
             LastSceneButton.gameObject.SetActive(false);
         }
         else
         {
+            data.score = data.lastScore;
             TitleText.text = "Time to be quarantined for two weeks. :(";
             NextSceneButton.gameObject.SetActive(false);
         }
