@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     private float pointsEverySecond = 0.01f;
 
     // difficulty per level
-    int difficulty = 1;
+    int difficulty =;
     int maxWaves = 10;
     public int currentWave = 0;
     bool zen = false;
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
     {
         data = GameObject.FindObjectOfType<PlayerData>();
         clock = GameObject.FindObjectOfType<ClockScript>();
-        clock.difficulty = difficulty;
+        clock.difficulty = data.difficulty;
         clock.level = 1 + ((data.maxWaves - data.baseWaves) / data.nextLevelWavesAdd);
         // load in level settings.
         // data.score = 0f;
